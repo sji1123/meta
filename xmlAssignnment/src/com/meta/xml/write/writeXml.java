@@ -56,7 +56,7 @@ public class writeXml {
 		            Element COMMENT = doc.createElement("COMMENT");
 		            child2.appendChild(COMMENT).setTextContent(f.getCOMMENT());
 					
-				}
+				} 
 				TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			    Transformer transformer = transformerFactory.newTransformer();
 			    DOMSource source = new DOMSource(doc);

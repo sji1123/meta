@@ -3,7 +3,9 @@ package com.meta.xml.run;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,6 +15,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.meta.xml.dto.F_TB;
@@ -53,8 +56,7 @@ public class run {
 			Document pdoc = docBuild.parse(pFile);
 			
 			NodeList fList = (NodeList)xpath.evaluate("/TABLE/ROWS/ROW[SIMILAR_RATE div 100 >= 15]", fdoc, XPathConstants.NODESET);
-			NodeList pList = (NodeList)xpath.evaluate("//ROW", pdoc, XPathConstants.NODESET);
-
+			
 			ArrayList<String> arr = new ArrayList<String>();
 			
 			for(int j=0 ; j < fList.getLength(); j++) {
@@ -77,7 +79,9 @@ public class run {
 				}
 			HashSet<String> arr2 = new HashSet<String>(arr);
 			ArrayList<String> arr3 = new ArrayList<String>(arr2);
-		
+			
+			NodeList pList = (NodeList)xpath.evaluate("//ROW", pdoc, XPathConstants.NODESET);
+			
 			for(int k=0 ; k < pList.getLength(); k++) {
 				String pPID = pdoc.getElementsByTagName("P_ID").item(k).getTextContent();
 				for(int l = 0 ; l < arr3.size(); l++) {
