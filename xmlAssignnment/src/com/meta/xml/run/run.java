@@ -8,6 +8,9 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -29,10 +32,11 @@ public class run {
 		DocumentBuilder docBuild;		
 			docBuild = docBuildFact.newDocumentBuilder();
 			Document doc = docBuild.parse(file);
-			doc.getDocumentElement().normalize();
-			
-		NodeList fileList = doc.getElementsByTagName("FILE_ID");
-	
+		
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		
+		NodeList fileList = (NodeList)xpath.evaluate("//FILE_ID", doc, XPathConstants.NODESET);
+		
 		for(int i = 0 ; i < fileList.getLength(); i++) {
 			LOG.info("=========="+i+"번째 파일========");
 			String fFileName = "C:\\Users\\meta\\Desktop\\1.XML 파일 분석\\F_"+i+"_TB.xml";
@@ -48,37 +52,29 @@ public class run {
 			Document fdoc = docBuild.parse(fFile);
 			Document pdoc = docBuild.parse(pFile);
 			
-			fdoc.getDocumentElement().normalize();
-			pdoc.getDocumentElement().normalize();
-			NodeList fList = fdoc.getElementsByTagName("ROW");
-			NodeList pList = pdoc.getElementsByTagName("ROW");
-			
+			NodeList fList = (NodeList)xpath.evaluate("/TABLE/ROWS/ROW[SIMILAR_RATE div 100 >= 15]", fdoc, XPathConstants.NODESET);
+			NodeList pList = (NodeList)xpath.evaluate("//ROW", pdoc, XPathConstants.NODESET);
+
 			ArrayList<String> arr = new ArrayList<String>();
 			
 			for(int j=0 ; j < fList.getLength(); j++) {
 		
-				String rate = fdoc.getElementsByTagName("SIMILAR_RATE").item(j).getTextContent();
-				int parseRate = Integer.parseInt(rate);
-				
-				if(parseRate/100 >= 15) {
-					
 					String rowid = fdoc.getElementsByTagName("ROWID").item(j).getTextContent()+"";
 					String volume = fdoc.getElementsByTagName("VOLUME").item(j).getTextContent()+"";
 					String file_name = fdoc.getElementsByTagName("FILE_NAME").item(j).getTextContent()+"";
 					String release_name = fdoc.getElementsByTagName("RELEASE_NAME").item(j).getTextContent()+"";
 					String similar_rate = fdoc.getElementsByTagName("SIMILAR_RATE").item(j).getTextContent()+"";
 					String file_path = fdoc.getElementsByTagName("FILE_PATH").item(j).getTextContent()+"";
-			        String pId = fdoc.getElementsByTagName("P_ID").item(j).getTextContent()+"";
+			        String fpId = fdoc.getElementsByTagName("P_ID").item(j).getTextContent()+"";
 					String exclusion = fdoc.getElementsByTagName("EXCLUSION").item(j).getTextContent()+"";
 					String comment = fdoc.getElementsByTagName("COMMENT").item(j).getTextContent()+"";
 					
-					if(!pId.equals("")) {
-					F_TB ftb = new F_TB(rowid,volume,file_name,release_name,similar_rate,file_path,pId,exclusion,comment);
-					arr.add(pId);
+					if(!fpId.equals("")) {
+					F_TB ftb = new F_TB(rowid,volume,file_name,release_name,similar_rate,file_path,fpId,exclusion,comment);
+					arr.add(fpId);
 					farr.add(ftb);
 					}
 				}
-			}
 			HashSet<String> arr2 = new HashSet<String>(arr);
 			ArrayList<String> arr3 = new ArrayList<String>(arr2);
 		
