@@ -10,7 +10,7 @@ import com.meta.dto.LogData;
 import com.meta.dto.LogTimeData;
 
 public class FileWrite {
-	 
+	  
 	public void WriteFile(List<LogData> newLogData) {
 		
 		FileWriter fw = null;

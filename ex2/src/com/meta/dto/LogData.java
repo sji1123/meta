@@ -1,5 +1,5 @@
 package com.meta.dto;
- 
+  
 public class LogData {
 	private String galileo_start;
 	private String esb_trans_id;

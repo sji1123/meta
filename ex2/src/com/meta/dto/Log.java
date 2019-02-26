@@ -1,7 +1,7 @@
 package com.meta.dto;
  
 public class Log {
-	
+	 
 	private String line;
 	private int lineNum;
 	private int threadNum;
