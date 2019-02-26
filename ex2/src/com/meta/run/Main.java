@@ -11,10 +11,10 @@ import com.meta.inputOutput.FileRead;
 import com.meta.inputOutput.FileRead;
 
 public class Main {
-
+ 
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-
+ 
 		FileRead readFile = new FileRead();
 		try {
 			//로그파일 분석할 클래스

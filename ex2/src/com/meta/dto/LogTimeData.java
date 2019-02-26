@@ -1,5 +1,5 @@
 package com.meta.dto;
-
+ 
 public class LogTimeData {
 	private String time;
 	private String completed;

@@ -1,5 +1,5 @@
 package com.meta.dto;
-
+ 
 public class Log {
 	
 	private String line;
