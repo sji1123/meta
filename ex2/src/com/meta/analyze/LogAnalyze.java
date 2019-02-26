@@ -15,7 +15,7 @@ import com.meta.dto.LogData;
 import com.meta.dto.LogTimeData;
 import com.meta.dto.Taskname;
 import com.meta.inputOutput.FileWrite;
-  
+   
 public class LogAnalyze {
 	//파일1,파일2를 생성하기 위한 클래스변수
 	FileWrite fw = new FileWrite();

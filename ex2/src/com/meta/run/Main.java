@@ -23,7 +23,7 @@ public class Main {
 			//로그파일을 한줄씩 읽어 맵형태로 저장
 			Map<Integer, Log> result = readFile.read("galileo.log");
 			
-			//저장된 맵형태를 분석
+			//저장된 맵형태를 분석 
 			analyzeFile.analyzeLogFile(result);
 			
 			Map<Integer, LogData> result1 = readFile.ReadFormat("FILE1.txt");

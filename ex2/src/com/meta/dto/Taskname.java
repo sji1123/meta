@@ -1,7 +1,7 @@
 package com.meta.dto;
 
 public class Taskname {
-	  
+	    
 	private String before;
 	private String marshalling;
 	private String invoking;

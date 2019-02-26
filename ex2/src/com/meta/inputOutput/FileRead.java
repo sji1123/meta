@@ -10,7 +10,7 @@ import java.util.Map;
 
 import com.meta.dto.Log;
 import com.meta.dto.LogData;
-  
+   
 public class FileRead {
 
 	public Map<Integer, Log> read(String filePath) throws IOException{
